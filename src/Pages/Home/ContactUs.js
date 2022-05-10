@@ -17,19 +17,17 @@ const ContactUs = () => {
           <input
             type="email"
             placeholder="Email Address"
-            className="input input-bordered w-full max-w-xs"
+            className="input input-bordered w-full max-w-md"
+        
           />
           <input
             type="text"
             placeholder="Subject"
-            className="input input-bordered w-full max-w-xs"
+            className="input input-bordered w-full max-w-md"
           />
-          <textarea className="textarea" placeholder="Your message"></textarea>
-          <input
-            type="Submit"
-            value="Submit"
-            className="input input-bordered w-50"
-          />
+          <textarea className="textarea"     rows={6}  placeholder="Your message"></textarea>
+          
+          <button className="btn btn-primary">Button</button>
         </div>
       </div>
     </section>
