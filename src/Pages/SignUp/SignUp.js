@@ -9,6 +9,7 @@ import { useForm } from "react-hook-form";
 import Loading from "../../Shared/Lodaing/Loading";
 import { Link, useNavigate } from "react-router-dom";
 import { updateEmail } from "firebase/auth";
+import useToken from "../../hooks/useToken";
 
 const SignUp = () => {
   const [signInWithGoogle, googleUser, googleLoading, googleError] =
@@ -16,6 +17,8 @@ const SignUp = () => {
   const [createUserWithEmailAndPassword, user, loading, error] =
     useCreateUserWithEmailAndPassword(auth);
   const [updateProfile, updating, updateError] = useUpdateProfile(auth);
+
+  const [token] =useToken(user || googleUser)
   const navigate = useNavigate();
   const {
     register,
@@ -43,9 +46,9 @@ const SignUp = () => {
       </p>
     );
   }
-  if (user || googleUser) {
-    console.log(user || googleUser);
-    // navigate ('/appointment')
+  if (token) {
+    
+    navigate ('/appointment')
   }
   return (
     <div className=" flex h-screen justify-center items-center">
