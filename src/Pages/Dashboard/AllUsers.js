@@ -1,9 +1,13 @@
 import React from 'react';
 import {useQuery} from 'react-query'
 import Loading from '../../Shared/Lodaing/Loading'
+import UserRow from './UserRow';
 
 const AllUsers = () => {
-    const {data: users,isLoading} = useQuery('users', ()=> fetch('http://localhost:5000/user').then(res=>res.json()));
+    const {data: users,isLoading, refetch} = useQuery('users', ()=> fetch('http://localhost:5000/user', {
+        method:'GET',
+     headers:{
+         authorization : `Bearer ${localStorage.getItem('accessToken')}`}}).then(res=>res.json()));
     if(isLoading){
         return <Loading/>
     }
@@ -24,12 +28,9 @@ const AllUsers = () => {
     </thead>
     <tbody>
       {/* <!-- row 1 --> */}
-      <tr>
-        <th>1</th>
-        <td>Cy Ganderton</td>
-        <td>Quality Control Specialist</td>
-        <td>Blue</td>
-      </tr>      
+          {
+              users.map(user=> <UserRow key= {user._id} user={user} refetch={refetch}></UserRow>)
+          }
     </tbody>
   </table>
 </div>
