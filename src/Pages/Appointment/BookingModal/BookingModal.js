@@ -6,7 +6,7 @@ import auth from "../../../firebase.init";
 import userEvent from "@testing-library/user-event";
 import {toast}from 'react-toastify'
 const BookingModal = ({ treatment, setTreatment, date, refetch }) => {
-  const { _id, name, slots } = treatment;
+  const { _id, name, slots, price } = treatment;
   const formatDate = format(date, "PP");
   const [user, loading, error] = useAuthState(auth);
 
@@ -21,9 +21,10 @@ const BookingModal = ({ treatment, setTreatment, date, refetch }) => {
       treatment:name,
       date: formatDate,
       slot,
+      price,
       patient: user.email,
       patientName: user.displayName,
-      phone: event.target.value,
+      phone: event.target.phone.value,
     };
     fetch('http://localhost:5000/booking',{
       method: 'POST',
